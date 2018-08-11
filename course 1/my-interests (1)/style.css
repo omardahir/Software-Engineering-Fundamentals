@@ -1,0 +1,12 @@
+body {
+  background-color: #b5fbff;
+}
+.header {
+  text-align: center;
+}
+table {
+  border-collapse: collapse;
+}
+table, th, td {
+  border: 1px solid grey
+}
