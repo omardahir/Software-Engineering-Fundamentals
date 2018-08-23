@@ -1,0 +1,25 @@
+#div1 {
+  width: 100px;
+  heigh:50px;
+  margin-bottom: 20px;
+}
+#div2 {
+  width: 100px;
+  heigh:75px;
+  margin-bottom: 20px;
+}
+.colorYellow {
+  background-color: yellow;
+}
+.colorMagenta {
+  background-color: magenta;
+}
+.colorRed {
+  background-color: red;
+}
+.colorGreen {
+  background-color: green;
+}
+.bannana {
+ background-image: url("https://media.giphy.com/media/IB9foBA4PVkKA/giphy.gif")
+}
