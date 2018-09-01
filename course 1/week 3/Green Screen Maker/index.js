@@ -24,7 +24,7 @@ function createComposite() {
     var x = pixel.getX();
     var y = pixel.getY();
     if (pixel.getGreen() > pixel.getRed() + pixel.getBlue()) {
-              bgImagePixel = bgImage.getPixel(x, y);
+        bgImagePixel = bgImage.getPixel(x, y);
         output.setPixel(x, y, bgImagePixel);
     }
     else {
