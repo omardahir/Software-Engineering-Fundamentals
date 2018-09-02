@@ -1,32 +1,33 @@
 var makeGrey;
 var redImage;
-var purpleImage;
-var cleanImage;
+var MagentaImage;
 var can1;
 var can2;
 var rainbow;
+var blurry;
 
 function upload() {
   can1 = document.getElementById("leftCanvas");
   var rawImage = document.getElementById("imageUpload");
-  makeGrey = new SimpleImage(rawImage);
-  purpleImage = new SimpleImage(rawImage);
-  cleanImage = new SimpleImage(rawImage);
+  var blankImage = new SimpleImage(rawImage);
+  greyImage = new SimpleImage(rawImage);
+  MagentaImage = new SimpleImage(rawImage);
   redImage = new SimpleImage(rawImage);
   rainbow = new SimpleImage(rawImage);
-  cleanImage.drawTo(can1);
+  blurry = new SimpleImage(rawImage);
+  blankImage.drawTo(can1);
 }
 
 function makeGrey() {
   can2 = document.getElementById("rightCanvas");
-  for (var pixel of image.values()) {
+  for (var pixel of greyImage.values()) {
     var average = (pixel.getRed() + pixel.getGreen() + pixel.getBlue()) / 3;
     pixel.setRed(average);
     pixel.setGreen(average);
     pixel.setBlue(average);
   }
-  canvas = document.getElementById('c1');
-  image.drawTo(canvas);
+  clearCanvas();
+  greyImage.drawTo(can2);
 }
 
 function makeRed() {
@@ -50,15 +51,15 @@ function makeRed() {
   redImage.drawTo(can2);
 }
 
-function makePurple() {
+function makeMagenta() {
     can2 = document.getElementById("rightCanvas");
-  for (var pixel of purpleImage.values()) {
+  for (var pixel of MagentaImage.values()) {
     var average = (pixel.getRed() + pixel.getGreen() + pixel.getBlue()) / 3;
     if (average < 128) {
-      var newPurple = average * 2;
+      var newMagenta = average * 2;
       pixel.setRed(255);
       pixel.setGreen(0);
-      pixel.setBlue(newPurple);
+      pixel.setBlue(newMagenta);
     } else {
       var newRed = (average * 2) - 255;
       pixel.setRed(newRed);
@@ -68,7 +69,7 @@ function makePurple() {
     }
   }
   clearCanvas();
-  purpleImage.drawTo(can2);
+  MagentaImage.drawTo(can2);
 }
 
 function makeRainbow() {
@@ -144,6 +145,33 @@ function makeRainbow() {
     }
   }
   rainbow.drawTo(can2);
+}
+
+function makeBlurry() {
+  can2 = document.getElementById("rightCanvas");
+  for (var pixel of blurry.values()) {
+    var rdmNum = Math.random();
+    var x = pixel.getX();
+    var y = pixel.getY();
+    if (rdmNum < 0.5) {
+      pixel.setPixel(x,y,pixel);
+    } else {
+      var offsetX;
+      if (x < blurry.getWidth()) {
+        offsetX = x+1;
+      } else {
+        offsetX = x-1;
+      }
+      if (y < blurry.getHeight()) {
+        offset = y+1;
+      } else {
+        offset = y-1;
+      }
+      var nearbyPixel = image.getPixel(offsetX, offsetY);
+      pixel.setPixel(x, y, nearbyPixel)
+    }
+  }
+  blurry.drawTo(can2);
 }
 
 function clearCanvas() {

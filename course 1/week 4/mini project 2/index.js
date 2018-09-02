@@ -1,16 +1,30 @@
+var makeGrey;
 var redImage;
 var purpleImage;
-var cleanImage;
+var blankImage;
 var can1;
 var can2;
 
 function upload() {
   can1 = document.getElementById("leftCanvas");
   var rawImage = document.getElementById("imageUpload");
+  greyImage = new SimpleImage(rawImage);
   purpleImage = new SimpleImage(rawImage);
-  cleanImage = new SimpleImage(rawImage);
+  blankImage = new SimpleImage(rawImage);
   redImage = new SimpleImage(rawImage);
-  cleanImage.drawTo(can1);
+  blankImage.drawTo(can1);
+}
+
+function makeGrey() {
+  can2 = document.getElementById("rightCanvas");
+  for (var pixel of greyImage.values()) {
+    var average = (pixel.getRed() + pixel.getGreen() + pixel.getBlue()) / 3;
+    pixel.setRed(average);
+    pixel.setGreen(average);
+    pixel.setBlue(average);
+  }
+  clearCanvas();
+  greyImage.drawTo(can2);
 }
 
 function makeRed() {
@@ -56,6 +70,7 @@ function makePurple() {
 }
 
 function clearCanvas() {
+  can2 = document.getElementById("rightCanvas");
   var context = can2.getContext("2d");
   context.clearRect(0,0,can2.width,can2.height);
 }
